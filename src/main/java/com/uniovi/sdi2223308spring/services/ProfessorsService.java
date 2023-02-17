@@ -1,6 +1,9 @@
 package com.uniovi.sdi2223308spring.services;
 
+import com.uniovi.sdi2223308spring.entities.Mark;
 import com.uniovi.sdi2223308spring.entities.Professor;
+import com.uniovi.sdi2223308spring.repositories.ProfessorsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,28 +12,21 @@ import java.util.List;
 
 @Service
 public class ProfessorsService {
-    private List<Professor> professors = new LinkedList<Professor>();
-
-    public ProfessorsService() {
-        professors.add(new Professor(1L, "DNI1", "Paco", "Fernandez", "Ciencias"));
-        professors.add(new Professor(2L, "DNI2", "Pedro", "Lopez", "Letras"));
-        professors.add(new Professor(3L, "DNI3", "Maria", "Lopez", "Economia"));
-        professors.add(new Professor(4L, "DNI4", "Pablo", "Hernandez", "Ciencias"));
-    }
+    @Autowired
+    private ProfessorsRepository professorsRepository;
 
     public List<Professor> getProfessors() {
-        return professors;
+        List<Professor> profList = new ArrayList<Professor>();
+        professorsRepository.findAll().forEach(profList::add);
+        return profList;
     }
     public Professor getProfessor(Long id) {
-        return professors.stream().filter(professor -> professor.getId().equals(id)).findFirst().get();
+        return professorsRepository.findById(id).get();
     }
     public void addProfessor(Professor p) {
-        if(p.getId() == null){
-            p.setId(professors.get(professors.size()-1).getId() + 1);
-        }
-        professors.add(p);
+        professorsRepository.save(p);
     }
     public void deleteProfessor(Long id) {
-        professors.removeIf(professor -> professor.getId().equals(id));
+        professorsRepository.deleteById(id);
     }
 }
