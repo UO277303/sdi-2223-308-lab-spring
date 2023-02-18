@@ -33,10 +33,19 @@ public class ProfessorsController {
         professorsService.deleteProfessor(id);
         return "redirect:/professor/list";
     }
-
     @RequestMapping(value="/professor/add")
     public String getProfessor() {
         return "professor/add";
     }
-
+    @RequestMapping(value="/professor/edit/{id}")
+    public String getEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("professor", professorsService.getProfessor(id));
+        return "professor/edit";
+    }
+    @RequestMapping(value = "/professor/edit/{id}", method = RequestMethod.POST)
+    public String setEdit(@ModelAttribute Professor professor, @PathVariable Long id) {
+        professor.setId(id);
+        professorsService.addProfessor(professor);
+        return "redirect:/professor/details/" + id;
+    }
 }
