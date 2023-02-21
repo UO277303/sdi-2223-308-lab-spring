@@ -2,12 +2,10 @@ package com.uniovi.sdi2223308spring.services;
 
 import com.uniovi.sdi2223308spring.entities.Mark;
 import com.uniovi.sdi2223308spring.repositories.MarksRepository;
-import jakarta.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
