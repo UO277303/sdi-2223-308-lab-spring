@@ -3,19 +3,22 @@ package com.uniovi.sdi2223308spring.controllers;
 import com.uniovi.sdi2223308spring.entities.Mark;
 import com.uniovi.sdi2223308spring.services.MarksService;
 import com.uniovi.sdi2223308spring.services.UsersService;
+import com.uniovi.sdi2223308spring.validators.MarksValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MarksController {
-
     @Autowired
     private UsersService usersService;
     @Autowired
     private MarksService marksService;
+    @Autowired
+    private MarksValidator marksValidator;
 
     @RequestMapping("/mark/list")
     public String getList(Model model) {
@@ -23,7 +26,12 @@ public class MarksController {
         return "/mark/list";
     }
     @RequestMapping(value = "/mark/add", method = RequestMethod.POST)
-    public String setMark(@ModelAttribute Mark mark) {
+    public String setMark(@Validated Mark mark, BindingResult result, Model model) {
+        marksValidator.validate(mark, result);
+        if (result.hasErrors()) {
+            model.addAttribute("usersList", usersService.getUsers());
+            return "mark/add";
+        }
         marksService.addMark(mark);
         return "redirect:/mark/list";
     }
@@ -40,6 +48,7 @@ public class MarksController {
     @RequestMapping(value="/mark/add")
     public String getMark(Model model) {
         model.addAttribute("usersList", usersService.getUsers());
+        model.addAttribute("mark", new Mark());
         return "mark/add";
     }
     @RequestMapping(value="/mark/edit/{id}")
