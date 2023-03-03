@@ -1,11 +1,15 @@
 package com.uniovi.sdi2223308spring.controllers;
 
+import com.uniovi.sdi2223308spring.entities.Mark;
 import com.uniovi.sdi2223308spring.entities.User;
+import com.uniovi.sdi2223308spring.services.MarksService;
 import com.uniovi.sdi2223308spring.services.RolesService;
 import com.uniovi.sdi2223308spring.services.SecurityService;
 import com.uniovi.sdi2223308spring.services.UsersService;
 import com.uniovi.sdi2223308spring.validators.SignUpFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,6 +28,8 @@ public class UsersController {
     private SignUpFormValidator signUpFormValidator;
     @Autowired
     private RolesService rolesService;
+    @Autowired
+    private MarksService marksService;
 
     @RequestMapping("/user/list")
     public String getListado(Model model) {
@@ -83,11 +89,13 @@ public class UsersController {
         return "login";
     }
     @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
-    public String home(Model model) {
+    public String home(Model model, Pageable pageable) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String dni = auth.getName();
         User activeUser = usersService.getUserByDni(dni);
-        model.addAttribute("markList", activeUser.getMarks());
+        Page<Mark> marks = marksService.getMarksForUser(pageable, activeUser);
+        model.addAttribute("markList", marks.getContent());
+        model.addAttribute("page", pageable);
         return "home";
     }
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
