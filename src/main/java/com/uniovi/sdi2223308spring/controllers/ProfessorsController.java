@@ -1,9 +1,13 @@
 package com.uniovi.sdi2223308spring.controllers;
 
 import com.uniovi.sdi2223308spring.entities.Professor;
+import com.uniovi.sdi2223308spring.entities.User;
 import com.uniovi.sdi2223308spring.services.ProfessorsService;
+import com.uniovi.sdi2223308spring.services.UsersService;
 import com.uniovi.sdi2223308spring.validators.ProfessorsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +20,8 @@ public class ProfessorsController {
     private ProfessorsService professorsService;
     @Autowired
     private ProfessorsValidator professorsValidator;
+    @Autowired
+    private UsersService usersService;
 
     @RequestMapping(value="/professor/list")
     public String getList(Model model) {
