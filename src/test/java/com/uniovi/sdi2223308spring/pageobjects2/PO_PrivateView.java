@@ -1,6 +1,6 @@
-package com.uniovi.sdi2223308spring.pageobjects;
+package com.uniovi.sdi2223308spring.pageobjects2;
 
-import com.uniovi.sdi2223308spring.util.*;
+import com.uniovi.sdi2223308spring.util2.SeleniumUtils;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

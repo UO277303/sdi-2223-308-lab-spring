@@ -1,4 +1,4 @@
-package com.uniovi.sdi2223308spring.pageobjects;
+package com.uniovi.sdi2223308spring.pageobjects2;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

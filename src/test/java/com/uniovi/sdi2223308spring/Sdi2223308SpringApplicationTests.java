@@ -1,7 +1,7 @@
 package com.uniovi.sdi2223308spring;
 
-import com.uniovi.sdi2223308spring.pageobjects.*;
-import com.uniovi.sdi2223308spring.util.*;
+import com.uniovi.sdi2223308spring.pageobjects2.*;
+import com.uniovi.sdi2223308spring.util2.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -316,7 +316,7 @@ class Sdi2223308SpringApplicationTests {
         //Vamos a la última página
         PO_PrivateView.goToLastPage(driver);
         //Borramos la nota
-        PO_PrivateView.deleteMark(driver, "Nueva Nota 1");
+        PO_PrivateView.deleteMark(driver, "Nota Nueva 1");
         //Volvemos a la última página
         PO_PrivateView.goToLastPage(driver);
         //Y esperamos a que NO aparezca la última "Nueva Nota 1"

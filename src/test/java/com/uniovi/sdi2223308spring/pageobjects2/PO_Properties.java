@@ -1,4 +1,4 @@
-package com.uniovi.sdi2223308spring.pageobjects;
+package com.uniovi.sdi2223308spring.pageobjects2;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;

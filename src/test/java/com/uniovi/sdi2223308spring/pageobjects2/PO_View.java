@@ -1,8 +1,8 @@
-package com.uniovi.sdi2223308spring.pageobjects;
+package com.uniovi.sdi2223308spring.pageobjects2;
 
 import java.util.List;
 
-import com.uniovi.sdi2223308spring.util.SeleniumUtils;
+import com.uniovi.sdi2223308spring.util2.SeleniumUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
